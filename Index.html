@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rose Garden Message</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: url('/Users/jayanthkappagantulaa/Desktop/Birthday/ChatGPT Image Apr 22, 2025, 05_17_26 PM.png') no-repeat center center fixed;
+      background-size: 1710px 1140px;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-size: cover;
+        background-position: center top;
+      }
+      .rose {
+        width: 20px;
+        height: 20px;
+      }
+      .message-box {
+        font-size: 1em;
+        padding: 10px 15px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1366px) {
+      body {
+        background-size: contain;
+        background-position: center;
+      }
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(0px);
+      transition: backdrop-filter 0.3s;
+    }
+    .rose {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid white;
+      transition: transform 0.3s, z-index 0.3s, box-shadow 0.3s;
+    }
+    .rose:hover {
+      box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.7);
+    }
+    .message-box {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px 25px;
+      border-radius: 8px;
+      display: none;
+      font-size: 1.2em;
+      max-width: 80%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+
+
+  <div class="message-box" id="messageBox"></div>
+
+  <script>
+    const roses = document.querySelectorAll('.rose');
+    const overlay = document.getElementById('overlay');
+    const messageBox = document.getElementById('messageBox');
+    let activeRose = null;
+
+    roses.forEach(rose => {
+      rose.addEventListener('click', () => {
+        if (activeRose === rose) {
+          rose.style.transform = '';
+          overlay.style.backdropFilter = 'blur(0px)';
+          messageBox.style.display = 'none';
+          activeRose = null;
+        } else {
+          roses.forEach(r => r.style.transform = '');
+          rose.style.transform = 'scale(2)';
+          overlay.style.backdropFilter = 'blur(5px)';
+          messageBox.innerText = rose.dataset.message;
+          messageBox.style.display = 'block';
+          activeRose = rose;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
